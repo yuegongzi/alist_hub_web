@@ -1,0 +1,9 @@
+es
+lib
+dist
+node_modules
+.eslintrc.js
+lint-staged.config.js
+src/.umi*
+tsconfig.json
+typings.d.ts

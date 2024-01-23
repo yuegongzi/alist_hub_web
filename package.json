@@ -1,0 +1,32 @@
+{
+  "private": true,
+  "author": "<yanganfu2012@gmail.com>",
+  "scripts": {
+    "dev": "max dev",
+    "build": "max build",
+    "prepare": "husky install",
+    "postinstall": "max setup",
+    "setup": "max setup",
+    "start": "npm run dev"
+  },
+  "dependencies": {
+    "@ant-design/icons": "5.2.6",
+    "@ant-design/pro-components": "2.6.48",
+    "@umijs/max": "4.1.1",
+    "ahooks": "3.7.1",
+    "antd": "5.13.2",
+    "axios": "^1.6.5",
+    "clsx": "^2.1.0",
+    "js-base64": "^3.7.6",
+    "qs": "^6.11.2"
+  },
+  "devDependencies": {
+    "@types/qs": "^6.9.11",
+    "@types/react": "18.2.48",
+    "@types/react-dom": "18.2.18",
+    "@umijs/fabric": "^4.0.1",
+    "husky": "8.0.3",
+    "lint-staged": "15.2.0",
+    "typescript": "5.3.3"
+  }
+}
