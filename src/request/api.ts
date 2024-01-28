@@ -6,31 +6,25 @@
  * - 统一超时设定30秒
  * - 处理url restfull风格参数替换
  */
-import { debounce, getValue, Session, Storage } from '@/utils';
+import { getValue, Session, Storage } from '@/utils';
+import { history } from '@umijs/max';
 import axios from 'axios';
+import debounce from 'lodash/debounce';
 import { parse, stringify } from 'qs';
 
 const AUTH_TOKEN = 'token';
 
 const redirectTo = debounce(function () {
-  let path = '/login';
+  const path = '/login';
   const query = parse(window.location.href.split('?')[1]);
   const redirect = stringify({
     ...query,
     redirect: window.location.href,
   });
-  if (path.indexOf('http') === 0) {
-    // http开头
-    window.location.href = `${path}?${redirect}`;
-  } else {
-    if (path.indexOf('?') > 0) {
-      path = path.substring(0, path.indexOf('?'));
-    }
-    if (window.location.pathname === path) {
-      return;
-    }
-    location.href = `${path}?${redirect}`;
+  if (window.location.pathname === path) {
+    return;
   }
+  history.push(`${path}?${redirect}`);
 }, 500);
 
 const api = axios.create({
@@ -45,16 +39,16 @@ const api = axios.create({
 api.interceptors.request.use(
   async (config) => {
     const { url = '', params = {} } = config;
-    const { path, urlParams } = analysis(url, params);
+    const path = analysis(url, params);
     config.url = path;
-    config.params = urlParams;
+    config.params = params;
     if (path.indexOf('http') === 0) {
       // 使用其他http请求路径时 直接返回
       return config;
     }
     if (path.indexOf('/open/') <= 0 && path.indexOf('/login') < 0) {
       // 如果路径不以'/open/'开头且不包含'/login'
-      const token = Storage.get(AUTH_TOKEN); // 获取token
+      const token = localStorage.getItem(AUTH_TOKEN); // 获取token
       config.headers.set('Authorization', token); // 设置请求头的Authorization为获取到的token
     }
     return config;
@@ -83,7 +77,7 @@ api.interceptors.response.use(
       return Promise.reject('权限不足');
     }
     if (status <= 504 && status > 500) {
-      location.pathname = '/exception/500';
+      location.pathname = '/@hub/exception/500';
       return Promise.reject('服务器异常');
     }
     if (status >= 404 && status < 422) {
@@ -98,8 +92,7 @@ api.interceptors.response.use(
  * @param url 路径
  * @param params 参数
  */
-function analysis(url: string, params: Record<any, any>) {
-  const urlParams: Record<string, any> = {};
+function analysis(url: string, params: string) {
   for (const key of Object.keys(params)) {
     // 处理url中需要替换的资源部分
     const symbol = `:${key}`;
@@ -107,10 +100,9 @@ function analysis(url: string, params: Record<any, any>) {
       const replacement = params[key];
       url = url.replace(symbol, replacement);
       delete params[key]; // 更新传入的params而不是创建一个新对象
-      urlParams[key] = replacement; // 保留被替换的键值对
     }
   }
-  return { path: url, urlParams };
+  return url;
 }
 
 export default api;

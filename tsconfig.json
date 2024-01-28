@@ -26,7 +26,7 @@
   "include": [
     "src/**/*",
     "typings/**/*",
-    "config/**/*"
+    "config/**/*",
   ],
   "exclude": ["node_modules", "build", "dist", "scripts", "src/.umi/*", "webpack", "jest"]
 }

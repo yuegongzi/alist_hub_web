@@ -4,7 +4,7 @@ import { createBem } from '@/utils';
 import { useModel } from '@@/exports';
 import { CheckOutlined } from '@ant-design/icons';
 import { Button, Image, Space, Typography } from 'antd';
-import clsx from 'clsx';
+import clsx from 'classnames';
 
 const [ bem ] = createBem('initial');
 
@@ -21,7 +21,7 @@ export default () => {
   const onClick = async () => {
     const response = await runAsync({ url: `${data}/status` });
     if (response.code === 200) {
-      setInitial({ ...initial, open_refresh_token: response.data });
+      setInitial({ ...initial, open_refresh_token: true });
     }
   };
   return (

@@ -3,7 +3,7 @@ import { createBem, rule, wait } from '@/utils';
 import { useModel } from '@@/exports';
 import { ProForm, ProFormText } from '@ant-design/pro-components';
 import { Button, message } from 'antd';
-import clsx from 'clsx';
+import clsx from 'classnames';
 import { useState } from 'react';
 
 const [ bem ] = createBem('initial');

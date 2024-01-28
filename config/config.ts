@@ -18,6 +18,7 @@ export default {
     locale: false,
     ...layout,
   },
+
   locale: {
     default: 'zh-CN',
     antd: true,
@@ -37,7 +38,7 @@ export default {
   manifest: {
     basePath: '/',
   },
-  base: '/@admin/',
+  base: '/@hub/',
   define: {
     'process.env.api': 'http://localhost/api/v1',
   },

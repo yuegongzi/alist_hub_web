@@ -1,10 +1,11 @@
 import { api } from '@/constants';
 import { usePost } from '@/hooks';
-import { createBem, isEmpty } from '@/utils';
+import { createBem } from '@/utils';
 import { useModel } from '@@/exports';
 import { LoadingOutlined } from '@ant-design/icons';
+import { history } from '@umijs/max';
 import { Button, Result } from 'antd';
-import clsx from 'clsx';
+import clsx from 'classnames';
 import { useEffect } from 'react';
 
 const [ bem ] = createBem('initial');
@@ -12,13 +13,17 @@ export default () => {
   const [ initial, setInitial ] = useModel('initial');
   const { runAsync, code, message } = usePost(api.initialize, { manual: true });
   const run = async () => {
-    const { code } = await runAsync(initial);
+    const { code } = await runAsync({ password: initial.password });
     if (code === 200) {
-      setInitial({ ...initial, open_refresh_token: '' });
+      setInitial({
+        ...initial,
+        open_refresh_token: false,
+        drive_refresh_token: false,
+      });
     }
   };
   useEffect(() => {
-    if (!isEmpty(initial.open_refresh_token)) {
+    if (initial.open_refresh_token && initial.drive_refresh_token) {
       run();
     }
   }, [ initial ]);
@@ -45,7 +50,11 @@ export default () => {
       <Result
         {...s}
         extra={[
-          <Button type='primary' key='console'>
+          <Button
+            type='primary'
+            key='console'
+            onClick={() => history.push('/')}
+          >
             去管理
           </Button>,
           <Button onClick={() => setInitial({ current: 0 })} key='buy'>

@@ -6,6 +6,11 @@ export default [
   },
   {
     layout: false,
+    path: '/login',
+    component: './login',
+  },
+  {
+    layout: false,
     path: '/exception/500',
     component: './exception',
   },
@@ -17,6 +22,16 @@ export default [
     name: '首页',
     path: '/home',
     component: './home',
+  },
+  {
+    name: '存储',
+    path: '/storage',
+    component: './storage',
+  },
+  {
+    name: '个人设置',
+    path: '/account/setting',
+    component: './account/setting',
   },
   //app
   {

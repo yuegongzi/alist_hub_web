@@ -38,3 +38,42 @@ export function removeItem(obj: any, removeItems: any) {
       }, {}),
   };
 }
+
+interface Item {
+  label: string;
+  value: boolean;
+}
+
+// 转换函数
+export const toObject = (items: Item[]): Record<string, boolean> => {
+  return items.reduce((obj, item) => {
+    obj[item.label] = item.value;
+    return obj;
+  }, {});
+};
+
+export type NullableString = string | null | undefined;
+
+function removeEmptyEntries<T extends Record<string, NullableString>>(
+  obj: T
+): Partial<Record<keyof T, Exclude<T[keyof T], ''>>> {
+  return Object.entries(obj).reduce((acc, [ key, value ]) => {
+    if (value !== '') {
+      // @ts-ignore
+      acc[key] = value;
+    }
+    return acc;
+  }, {} as Partial<Record<keyof T, Exclude<T[keyof T], ''>>>);
+}
+export function sortParam(sort: Record<string, string>) {
+  const descend = [];
+  const ascend = [];
+  for (const sortKey in sort) {
+    if (sort[sortKey] === 'ascend') {
+      ascend.push(sortKey);
+    } else {
+      descend.push(sortKey);
+    }
+  }
+  return removeEmptyEntries({ ascs: ascend.join(), descs: descend.join() });
+}

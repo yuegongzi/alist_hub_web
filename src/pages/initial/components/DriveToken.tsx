@@ -1,11 +1,10 @@
 import { api } from '@/constants';
 import { useGet, usePost, useSessionStorageState } from '@/hooks';
-import { createBem, getValue, isEmpty, isExpired } from '@/utils';
+import { createBem, isEmpty, isExpired } from '@/utils';
 import { RedoOutlined } from '@ant-design/icons';
 import { useInterval } from 'ahooks';
 import { Button, Popover, QRCode, Space, Typography } from 'antd';
-import clsx from 'clsx';
-import { Base64 } from 'js-base64';
+import clsx from 'classnames';
 import { useEffect, useState } from 'react';
 import { useModel } from 'umi';
 
@@ -24,16 +23,12 @@ export default () => {
       t: `${state.t}`,
     });
     if (code === 200) {
-      switch (data.qrCodeStatus) {
+      switch (data) {
         case 'CONFIRMED':
           setStatus('scanned');
-          const user = JSON.parse(Base64.decode(data.bizExt));
-          const refresh_token = getValue(user, 'pds_login_result.refreshToken');
-          const userName = getValue(user, 'pds_login_result.userName');
           setInitial({
             ...initial,
-            drive_refresh_token: refresh_token,
-            userName,
+            drive_refresh_token: true,
           });
           // eslint-disable-next-line no-undefined
           setTime(undefined);
@@ -58,7 +53,7 @@ export default () => {
   };
   useEffect(() => {
     if (initial.current == 1) {
-      if (isEmpty(initial.drive_refresh_token)) {
+      if (!initial.drive_refresh_token) {
         if (isExpired(state.t || 0, 120000)) {
           _getQr();
         } else {
@@ -89,7 +84,7 @@ export default () => {
                 onClick={() => {
                   setInitial({
                     ...initial,
-                    drive_refresh_token: '',
+                    drive_refresh_token: false,
                     userName: '',
                   });
                   _getQr();

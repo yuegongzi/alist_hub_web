@@ -5,4 +5,12 @@ export const api = {
   aliyun_drive: '/api/v1/open/aliyun/drive/qr',
   aliyun_openapi: '/api/v1/open/aliyun/openapi/qr',
   initialize: '/api/v1/open/initialize',
+  security: '/api/v1/setting/security',
+  account: '/api/v1/setting/account',
+  login: '/api/v1/login',
+  password: '/api/v1/user/password',
+  sign: '/api/v1/user/sign',
+  storage: '/api/v1/storage',
 };
+
+export const ignore_menu = [ '/account/setting' ];

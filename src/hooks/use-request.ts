@@ -1,7 +1,7 @@
+import { message } from '@/components';
 import { getValue } from '@/utils';
 import { useRequest } from 'ahooks';
 import type { Options } from 'ahooks/lib/useRequest/src/types';
-import { message } from 'antd';
 import Ask from '../request';
 
 export type Response = {

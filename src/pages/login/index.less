@@ -1,0 +1,95 @@
+// 定义变量
+@hub-login-bg: url(../../assets/bg.jpg);
+@hub-login-text-color: #fff;
+@hub-login-content-padding: 4em 2em;
+@hub-login-letter-spacing: 4px;
+
+.hub-login {
+  .ant-form-item-required {
+    color: @hub-login-text-color !important;
+  }
+  &__layout {
+    position: relative;
+    min-height: 100vh;
+    background-image: @hub-login-bg;
+    background-repeat: repeat-x;
+    background-size: cover;
+    background-attachment: fixed;
+
+    // 使用Less mixin来编写动画（如果多个元素需要同样的动画）
+    .slide-left-animation();
+  }
+
+  &__layer {
+    min-height: 100vh;
+    background: rgba(0, 0, 0, 0.7);
+  }
+
+  &__title {
+    padding: 1em 0 0.4em;
+    color: @hub-login-text-color;
+    font-weight: 300;
+    font-size: 45px;
+    letter-spacing: @hub-login-letter-spacing;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  &__content {
+    position: relative;
+    z-index: 999;
+    max-width: 360px;
+    margin: 0 auto;
+    padding: @hub-login-content-padding;
+    background: rgba(255, 255, 255, 0.04);
+    box-shadow: -1px 4px 28px 0 rgba(0, 0, 0, 0.75);
+  }
+
+  &__copyright {
+    padding: 2em 0;
+    text-align: center;
+    .ant-pro-global-footer-copyright {
+      color: #ccc;
+    }
+  }
+
+  // 创建一个mix-in用于动画
+  .slide-left-animation() {
+    -webkit-animation: slideleft 20000s infinite linear;
+    animation: slideleft 20000s infinite linear;
+
+    // 如果动画在不同分辨率下有不同的需求，可以通过媒体查询进行调整
+    @media screen and (max-width: 768px) {
+      background-position: initial;
+      animation: none;
+    }
+  }
+
+  // 动画关键帧定义
+  @keyframes slideleft {
+    0% {
+      background-position: 0;
+    }
+    100% {
+      background-position: 90000%;
+    }
+  }
+
+  &__logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 40px;
+    > img {
+      width: 55px;
+      height: 55px;
+      object-fit: contain;
+      background-color: @hub-login-text-color;
+      border-radius: 50%;
+    }
+  }
+
+  &__button {
+    margin-top: 40px;
+  }
+}

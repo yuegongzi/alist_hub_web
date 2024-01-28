@@ -8,7 +8,7 @@ import {
 import { ProCard } from '@ant-design/pro-components';
 import { Access } from '@umijs/max';
 import { Steps } from 'antd';
-import clsx from 'clsx';
+import clsx from 'classnames';
 import { useModel } from 'umi';
 import DriveToken from './components/DriveToken';
 import OpenToken from './components/OpenToken';
