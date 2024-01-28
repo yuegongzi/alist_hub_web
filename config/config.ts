@@ -39,6 +39,7 @@ export default {
     basePath: '/',
   },
   base: '/@hub/',
+  publicPath: '/@hub/',
   define: {
     'process.env.api': 'http://localhost/api/v1',
   },
