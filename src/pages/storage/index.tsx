@@ -1,7 +1,7 @@
 import { api } from '@/constants';
-import { useDelete, useGet, usePut } from '@/hooks';
+import { usePost } from '@/hooks';
 import { request } from '@/services';
-import { ExclamationCircleFilled, RedoOutlined } from '@ant-design/icons';
+import { ExclamationCircleFilled } from '@ant-design/icons';
 import type { ActionType, ProColumns } from '@ant-design/pro-components';
 import { PageContainer, ProTable } from '@ant-design/pro-components';
 import { Access } from '@umijs/max';
@@ -11,14 +11,16 @@ import Edit from './components/Edit';
 
 export default () => {
   const ref = useRef<ActionType>(null);
-  const { run, loading } = useGet(api.storage + '/load', {
+  const update = usePost(api.alist_storage + '/:status', {
     manual: true,
     tip: 'all',
   });
-  const update = usePut(api.storage + '/:id', { manual: true, tip: 'all' });
-  const remove = useDelete(api.storage + '/:id', { manual: true, tip: 'all' });
+  const remove = usePost(api.alist_storage + '/delete', {
+    manual: true,
+    tip: 'all',
+  });
   const onChange = async (id: string, v: boolean) => {
-    await update.runAsync({ disabled: v }, { id });
+    await update.runAsync({}, { status: v ? 'disable' : 'enable', id });
     ref.current?.reload();
   };
   const onClick = (id: any) => {
@@ -27,7 +29,7 @@ export default () => {
       icon: <ExclamationCircleFilled />,
       content: '删除后数据不可恢复',
       onOk: async () => {
-        await remove.runAsync({ id });
+        await remove.runAsync({}, { id });
         ref.current?.reload();
       },
     });
@@ -99,18 +101,7 @@ export default () => {
     );
   };
   const toolBarRender = () => {
-    return [
-      <Edit key='add' actionRef={ref} />,
-      <Button
-        disabled={loading}
-        loading={loading}
-        key='load'
-        icon={<RedoOutlined />}
-        onClick={() => run()}
-      >
-        重新加载
-      </Button>,
-    ];
+    return [ <Edit key='add' actionRef={ref} /> ];
   };
   return (
     <PageContainer>

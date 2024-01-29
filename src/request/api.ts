@@ -29,7 +29,7 @@ const redirectTo = debounce(function () {
 
 const api = axios.create({
   baseURL: `${location.origin}`,
-  timeout: 1000 * 30,
+  timeout: 1000 * 300,
   headers: {
     'Content-Type': 'application/json',
   },

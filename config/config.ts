@@ -52,5 +52,9 @@ export default {
       target: 'http://localhost',
       changeOrigin: true,
     },
+    '/api/': {
+      target: 'http://localhost:5244',
+      changeOrigin: true,
+    },
   },
 };

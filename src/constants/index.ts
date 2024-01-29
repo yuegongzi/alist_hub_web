@@ -11,6 +11,7 @@ export const api = {
   password: '/api/v1/user/password',
   sign: '/api/v1/user/sign',
   storage: '/api/v1/storage',
+  alist_storage: '/api/admin/storage',
 };
 
 export const ignore_menu = [ '/account/setting' ];
