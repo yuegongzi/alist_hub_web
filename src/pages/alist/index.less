@@ -1,0 +1,15 @@
+.hub-alist {
+  margin-top: -32px;
+  &__iframe {
+    width: 100%;
+    height: 100vh;
+    border: none; /* 针对所有现代浏览器 */
+    outline: none; /* 去除某些浏览器的轮廓线 */
+    box-shadow: none; /* 可选，去除阴影效果 */
+  }
+  :global {
+    .ant-pro-layout-content {
+      padding-block: 0 !important;
+    }
+  }
+}

@@ -100,12 +100,6 @@ export default (props: { actionRef: RefObject<ActionType> }) => {
                   {...rule('根文件夹ID')}
                 />
               </Access>
-              <Access accessible={[ 'PikPakShare' ].includes(driver)}>
-                <ProFormText
-                  name={[ 'addition', 'root_folder_id' ]}
-                  {...rule('根文件夹ID')}
-                />
-              </Access>
             </div>
           );
         }}

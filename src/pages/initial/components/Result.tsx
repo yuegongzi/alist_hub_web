@@ -53,7 +53,7 @@ export default () => {
           <Button
             type='primary'
             key='console'
-            onClick={() => history.push('/')}
+            onClick={() => history.push('/alist')}
           >
             去管理
           </Button>,

@@ -49,7 +49,7 @@ export default {
   npmClient: 'yarn',
   proxy: {
     '/api/v1': {
-      target: 'http://localhost',
+      target: 'http://localhost:5245',
       changeOrigin: true,
     },
     '/api/': {

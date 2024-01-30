@@ -7,11 +7,14 @@ export const api = {
   initialize: '/api/v1/open/initialize',
   security: '/api/v1/setting/security',
   account: '/api/v1/setting/account',
+  config: '/api/v1/setting/config',
   login: '/api/v1/login',
   password: '/api/v1/user/password',
   sign: '/api/v1/user/sign',
   storage: '/api/v1/storage',
   alist_storage: '/api/admin/storage',
+  user: '/api/admin/user/update',
+  setting: '/api/admin/setting',
 };
 
 export const ignore_menu = [ '/account/setting' ];

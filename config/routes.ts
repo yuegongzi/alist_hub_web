@@ -29,6 +29,11 @@ export default [
     component: './storage',
   },
   {
+    name: '站点',
+    path: '/alist',
+    component: './alist',
+  },
+  {
     name: '个人设置',
     path: '/account/setting',
     component: './account/setting',

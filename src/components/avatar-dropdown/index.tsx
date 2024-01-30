@@ -1,5 +1,6 @@
 import { Session, Storage } from '@/utils';
 import {
+  DashboardOutlined,
   LogoutOutlined,
   SettingOutlined,
   UserOutlined,
@@ -92,14 +93,19 @@ export const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({
     ...(menu
       ? [
           {
-            key: 'setting?activeKey=center',
-            icon: <UserOutlined />,
-            label: '修改密码',
-          },
-          {
             key: 'setting?activeKey=account',
             icon: <SettingOutlined />,
             label: '个人设置',
+          },
+          {
+            key: 'setting?activeKey=site',
+            icon: <DashboardOutlined />,
+            label: '站点设置',
+          },
+          {
+            key: 'setting?activeKey=password',
+            icon: <UserOutlined />,
+            label: '修改密码',
           },
           {
             type: 'divider' as const,
