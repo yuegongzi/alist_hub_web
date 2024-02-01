@@ -15,6 +15,7 @@ export const api = {
   alist_storage: '/api/admin/storage',
   user: '/api/admin/user/update',
   setting: '/api/admin/setting',
+  search: '/api/v1/search_node',
 };
 
 export const ignore_menu = [ '/account/setting' ];

@@ -3,6 +3,7 @@ import {
   AvatarName,
   Footer,
   MessageWrapper,
+  Search,
 } from '@/components';
 import { ignore_menu } from '@/constants';
 import { createNamespace } from '@/utils';
@@ -31,6 +32,7 @@ export const layout: RunTimeLayoutConfig = ({
     menu: {
       locale: false,
     },
+    actionsRender: () => [ <Search key='search' /> ],
     avatarProps: {
       icon: <UserOutlined />,
       title: <AvatarName />,

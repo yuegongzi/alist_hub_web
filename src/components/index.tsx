@@ -6,3 +6,4 @@ export {
   modal,
   notification,
 } from './message-wrapper';
+export { default as Search } from './search';

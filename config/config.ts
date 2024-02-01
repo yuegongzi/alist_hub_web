@@ -47,9 +47,10 @@ export default {
   fastRefresh: true,
   favicons: [ layout.logo ],
   npmClient: 'yarn',
+  esbuildMinifyIIFE: true,
   proxy: {
     '/api/v1': {
-      target: 'http://localhost:5245',
+      target: 'http://localhost',
       changeOrigin: true,
     },
     '/api/': {

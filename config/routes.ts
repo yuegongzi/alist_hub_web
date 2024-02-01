@@ -16,10 +16,15 @@ export default [
   },
   {
     path: '/',
-    redirect: '/home',
+    redirect: '/alist',
   },
   {
     name: '首页',
+    path: '/alist',
+    component: './alist',
+  },
+  {
+    name: '签到',
     path: '/home',
     component: './home',
   },
@@ -27,11 +32,6 @@ export default [
     name: '存储',
     path: '/storage',
     component: './storage',
-  },
-  {
-    name: '站点',
-    path: '/alist',
-    component: './alist',
   },
   {
     name: '个人设置',
