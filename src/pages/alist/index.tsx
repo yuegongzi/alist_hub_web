@@ -13,7 +13,11 @@ export default () => {
       : location.origin;
   return (
     <div className={clsx(bem())}>
-      <iframe src={`${url}${state.path}`} className={clsx(bem('iframe'))} />
+      <iframe
+        allowFullScreen
+        src={`${url}${state.path}`}
+        className={clsx(bem('iframe'))}
+      />
     </div>
   );
 };

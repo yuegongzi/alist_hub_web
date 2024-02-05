@@ -16,6 +16,8 @@ export const api = {
   user: '/api/admin/user/update',
   setting: '/api/admin/setting',
   search: '/api/v1/search_node',
+  watcher: '/api/v1/file/watcher',
+  fs: '/api/fs/list',
 };
 
 export const ignore_menu = [ '/account/setting' ];

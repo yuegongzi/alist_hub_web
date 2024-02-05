@@ -34,6 +34,11 @@ export default [
     component: './storage',
   },
   {
+    name: '转存',
+    path: '/watcher',
+    component: './watcher',
+  },
+  {
     name: '个人设置',
     path: '/account/setting',
     component: './account/setting',
