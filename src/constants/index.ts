@@ -18,6 +18,10 @@ export const api = {
   search: '/api/v1/search_node',
   watcher: '/api/v1/file/watcher',
   fs: '/api/fs/list',
+  system_info: '/api/v1/system/info',
+  ping: '/api/public/settings',
+  alist: '/api/v1/alist',
+  user_info: '/api/v1/user',
 };
 
 export const ignore_menu = [ '/account/setting' ];

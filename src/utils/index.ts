@@ -1,4 +1,5 @@
 export * from './bem';
+export * from './byte';
 export * from './form';
 export * from './object';
 export * from './session';

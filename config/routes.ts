@@ -43,6 +43,11 @@ export default [
     path: '/account/setting',
     component: './account/setting',
   },
+  {
+    name: '监控',
+    path: '/monitor',
+    component: './monitor',
+  },
   //app
   {
     path: '*',

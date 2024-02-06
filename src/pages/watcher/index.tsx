@@ -63,6 +63,7 @@ export default () => {
   return (
     <PageContainer>
       <ProTable
+        search={false}
         actionRef={ref}
         toolBarRender={toolBarRender}
         scroll={{ x: 'max-content' }}
