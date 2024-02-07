@@ -75,7 +75,7 @@ export default (props: { actionRef: RefObject<ActionType> }) => {
   const fs = usePost(api.fs, { manual: true });
   const { data } = useGet(api.storage, {
     initialData: [],
-    defaultParams: { pageSize: 100 },
+    defaultParams: { pageSize: 100, driver: 'AliyundriveShare2Open' },
   });
   const onFinish = async (values: any) => {
     const { code } = await runAsync(values);
