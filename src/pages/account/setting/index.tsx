@@ -4,6 +4,7 @@ import { Layout, Menu, theme } from 'antd';
 import classNames from 'classnames';
 import { useEffect, useState } from 'react';
 import Account from './components/Account';
+import Notice from './components/Notice';
 import Password from './components/Password';
 import Security from './components/Security';
 import Site from './components/Site';
@@ -79,10 +80,7 @@ export default () => {
         <Site />
       </Access>
       <Access accessible={key === 'notice'}>
-        <div style={{ padding: '50px' }}>
-          {' '}
-          接入Server酱实现通知功能 暂未开发
-        </div>
+        <Notice />
       </Access>
     </Layout>
   );

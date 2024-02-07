@@ -22,6 +22,7 @@ export const api = {
   ping: '/api/public/settings',
   alist: '/api/v1/alist',
   user_info: '/api/v1/user',
+  notice: '/api/v1/notice',
 };
 
 export const ignore_menu = [ '/account/setting' ];
