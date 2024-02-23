@@ -35,6 +35,10 @@ const options = [
     label: 'AList V2',
     value: 'AList V2',
   },
+  {
+    label: 'WebDav',
+    value: 'WebDav',
+  },
 ];
 
 export default (props: { actionRef: RefObject<ActionType> }) => {
@@ -98,6 +102,21 @@ export default (props: { actionRef: RefObject<ActionType> }) => {
                 <ProFormText
                   name={[ 'addition', 'root_folder_id' ]}
                   {...rule('根文件夹ID')}
+                />
+              </Access>
+              <Access accessible={[ 'WebDav' ].includes(driver)}>
+                <ProFormText name={[ 'addition', 'address' ]} {...rule('地址')} />
+                <ProFormText
+                  name={[ 'addition', 'username' ]}
+                  {...rule('用户名')}
+                />
+                <ProFormText.Password
+                  name={[ 'addition', 'password' ]}
+                  {...rule('密码')}
+                />
+                <ProFormText
+                  name={[ 'addition', 'root_folder_path' ]}
+                  {...rule('目录')}
                 />
               </Access>
             </div>

@@ -21,6 +21,7 @@ export default () => {
     <div>
       <Input
         className='search'
+        readOnly
         onClick={() => setState({ ...state, open: true })}
         prefix={<SearchOutlined />}
         placeholder='输入关键词'
