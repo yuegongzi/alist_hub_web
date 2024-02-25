@@ -4,6 +4,7 @@ import { Layout, Menu, theme } from 'antd';
 import classNames from 'classnames';
 import { useEffect, useState } from 'react';
 import Account from './components/Account';
+import Download from './components/Download';
 import Notice from './components/Notice';
 import Password from './components/Password';
 import Security from './components/Security';
@@ -27,7 +28,10 @@ const items = [
     key: 'notice',
     label: '通知设置',
   },
-
+  {
+    key: 'download',
+    label: '下载设置',
+  },
   {
     key: 'password',
     label: '密码修改',
@@ -78,6 +82,9 @@ export default () => {
       </Access>
       <Access accessible={key === 'site'}>
         <Site />
+      </Access>
+      <Access accessible={key === 'download'}>
+        <Download />
       </Access>
       <Access accessible={key === 'notice'}>
         <Notice />

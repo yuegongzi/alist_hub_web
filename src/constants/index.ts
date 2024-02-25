@@ -8,6 +8,7 @@ export const api = {
   security: '/api/v1/setting/security',
   account: '/api/v1/setting/account',
   config: '/api/v1/setting/config',
+  aria2: '/api/v1/setting/aria2',
   login: '/api/v1/login',
   password: '/api/v1/user/password',
   sign: '/api/v1/user/sign',
