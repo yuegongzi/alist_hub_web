@@ -1,6 +1,6 @@
 import { api } from '@/constants';
 import { useGet } from '@/hooks';
-import { createBem, wait } from '@/utils';
+import { createBem } from '@/utils';
 import { useInfiniteScroll } from 'ahooks';
 import { Card, Col, Divider, Flex, Input, Rate, Row, Spin } from 'antd';
 import classNames from 'classnames';
@@ -28,7 +28,6 @@ export default () => {
       if (loadingMore) {
         return { list: [], noMore: false, current: d.current };
       }
-      await wait(1000);
       const { data }: any = await runAsync({ current: cur, name });
       return { list: data, noMore: data.length < 36, current: cur };
     },
@@ -41,7 +40,7 @@ export default () => {
   const url =
     process.env.NODE_ENV === 'development'
       ? 'http://localhost:5245/api/v1'
-      : process.env.api;
+      : `${location.origin}/api/v1`;
   const onSearch = (value: string) => {
     setName(value);
     reload();
