@@ -24,6 +24,7 @@ export const api = {
   alist: '/api/v1/alist',
   user_info: '/api/v1/user',
   notice: '/api/v1/notice',
+  movie: '/api/v1/movie',
 };
 
 export const ignore_menu = [ '/account/setting' ];

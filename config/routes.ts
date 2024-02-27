@@ -39,6 +39,11 @@ export default [
     component: './watcher',
   },
   {
+    name: '电影',
+    path: '/movie',
+    component: './movie',
+  },
+  {
     name: '个人设置',
     path: '/account/setting',
     component: './account/setting',

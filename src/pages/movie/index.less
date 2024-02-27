@@ -1,0 +1,67 @@
+.hub-movie {
+  &__search {
+    position: fixed;
+    top: 55px;
+    right: 0;
+    left: 0;
+    z-index: 1000;
+    width: 100%;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.5); // 轻微透明
+    backdrop-filter: blur(5px); // 毛玻璃效果
+    transition: background-color 0.3s, backdrop-filter 0.3s;
+  }
+
+  &__bar {
+    width: 50%;
+    margin: 0 25%;
+    .ant-input-outlined {
+      background: transparent;
+      border-color: transparent;
+    }
+  }
+
+  &__content {
+    margin-top: 40px;
+  }
+
+  .ant-row {
+    .ant-card {
+      margin-bottom: 10px;
+      transition: all 0.3s;
+
+      &:hover {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      .ant-card-cover {
+        position: relative;
+        overflow: hidden;
+
+        img {
+          transition: transform 0.3s ease-in-out;
+        }
+
+        &:hover img {
+          transform: scale(1.1);
+        }
+      }
+    }
+  }
+
+  &__image {
+    height: 280px;
+    object-fit: cover;
+  }
+
+  &__score {
+    margin-left: 10px;
+    line-height: 16px;
+  }
+
+  &__rate {
+    color: #f3b04b;
+    font-size: 16px;
+    line-height: 16px;
+  }
+}

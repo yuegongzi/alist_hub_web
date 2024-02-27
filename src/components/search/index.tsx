@@ -1,9 +1,10 @@
 import { api } from '@/constants';
 import { useGet } from '@/hooks';
 import { SearchOutlined } from '@ant-design/icons';
-import { useModel } from '@umijs/max';
+import { useLocation, useModel } from '@umijs/max';
 import { Avatar, Input, List, Modal } from 'antd';
 import './index.less';
+
 export default () => {
   const [ state, setState ] = useModel('search');
   const { runAsync, data } = useGet(api.search, {
@@ -11,12 +12,16 @@ export default () => {
     debounceWait: 500,
     initialData: [],
   });
+  const location = useLocation();
   const onSearch = async (s: string) => {
     await runAsync({ s });
   };
   const onClick = (item: any) => {
     setState({ path: `${item.parent}/${item.name}`, open: false });
   };
+  if (location.pathname !== '/alist') {
+    return null;
+  }
   return (
     <div>
       <Input
