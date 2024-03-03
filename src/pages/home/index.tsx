@@ -1,6 +1,6 @@
 import { api } from '@/constants';
 import { useGet } from '@/hooks';
-import { createBem } from '@/utils';
+import { createBem, lunarMonthToNumber } from '@/utils';
 import { PageContainer } from '@ant-design/pro-components';
 import { Calendar, Card } from 'antd';
 import clsx from 'classnames';
@@ -27,10 +27,14 @@ export default () => {
               if (!data.signInLogs) {
                 return null;
               }
-              const item = data.signInLogs.filter(
-                (item: any) => item.day === current.$D
-              )[0];
-              if (item.status === 'normal') {
+              const item = data.signInLogs.filter((i: any) => {
+                return (
+                  i.day === current.$D &&
+                  lunarMonthToNumber(i.calendarMonth || '未知') ===
+                    current.$M + 1
+                );
+              })[0];
+              if (item?.status === 'normal') {
                 return (
                   <div className={clsx(bem('item'))}>
                     <img src={item.icon} alt='暂无图片' />
