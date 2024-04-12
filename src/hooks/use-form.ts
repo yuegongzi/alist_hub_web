@@ -1,5 +1,5 @@
 import { isEmpty } from '@/utils';
-import type { ProFormInstance } from '@ant-design/pro-form';
+import type { ProFormInstance } from '@ant-design/pro-components';
 import { useBoolean, useMemoizedFn } from 'ahooks';
 import type { NamePath } from 'rc-field-form/es/interface';
 import type { RefObject } from 'react';

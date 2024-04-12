@@ -1,6 +1,6 @@
 import { api } from '@/constants';
-import { usePost } from '@/hooks';
-import { rule } from '@/utils';
+import { usePost, useForm } from '@/hooks';
+import { rule, extractParts } from '@/utils';
 import { PlusOutlined } from '@ant-design/icons';
 import type { ActionType } from '@ant-design/pro-components';
 import {
@@ -8,6 +8,7 @@ import {
   ProFormDependency,
   ProFormSelect,
   ProFormText,
+  ProFormTextArea,
 } from '@ant-design/pro-components';
 import { Access } from '@umijs/max';
 import { Button } from 'antd';
@@ -43,6 +44,7 @@ const options = [
 
 export default (props: { actionRef: RefObject<ActionType> }) => {
   const { actionRef } = props;
+  const [ ref, { set } ] = useForm();
   const { runAsync } = usePost(api.storage, { manual: true, tip: 'all' });
   const onFinish = async (values: any) => {
     const { code } = await runAsync(values);
@@ -52,9 +54,21 @@ export default (props: { actionRef: RefObject<ActionType> }) => {
     }
     return false;
   };
+  const onChange = (e: any) => {
+    const [ share_id, root_folder_id ] = extractParts(e.target.value);
+    if (share_id && root_folder_id) {
+      set({
+        addition: {
+          share_id,
+          root_folder_id,
+        },
+      });
+    }
+  };
   return (
     <ModalForm
       onFinish={onFinish}
+      formRef={ref}
       modalProps={{ maskClosable: false }}
       layout='horizontal'
       title='编辑'
@@ -71,6 +85,12 @@ export default (props: { actionRef: RefObject<ActionType> }) => {
         {({ driver }) => {
           return (
             <div>
+              <Access accessible={[ 'AliyundriveShare2Open' ].includes(driver)}>
+                <ProFormTextArea
+                  fieldProps={{ onChange }}
+                  {...rule('自动识别', false)}
+                />
+              </Access>
               <Access accessible={[ 'AList V2', 'AList V3' ].includes(driver)}>
                 <ProFormText name={[ 'addition', 'url' ]} {...rule('站点地址')} />
                 <ProFormText

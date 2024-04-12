@@ -20,7 +20,8 @@
     "dayjs": "^1.11.10",
     "js-base64": "^3.7.6",
     "lodash": "^4.17.21",
-    "qs": "^6.11.2"
+    "qs": "^6.11.2",
+    "rc-field-form": "^1.44.0"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.202",

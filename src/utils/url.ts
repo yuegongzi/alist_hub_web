@@ -41,3 +41,12 @@ export function isValidUrl(urlString: string): boolean {
     return false;
   }
 }
+
+export function extractParts(url: string): string[] {
+  const regex = /https:\/\/www\.alipan\.com\/s\/([^\/]+)\/folder\/([^\/]+)/;
+  const match = url.match(regex);
+  if (match) {
+    return [ match[1], match[2] ]; // match[1] 和 match[2] 分别是你需要的两部分
+  }
+  return []; // 如果没有匹配，返回空数组
+}
