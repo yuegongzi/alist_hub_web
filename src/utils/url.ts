@@ -44,9 +44,15 @@ export function isValidUrl(urlString: string): boolean {
 
 export function extractParts(url: string): string[] {
   const regex = /https:\/\/www\.alipan\.com\/s\/([^\/]+)\/folder\/([^\/]+)/;
+  const drive =
+    /https:\/\/www\.aliyundrive\.com\/s\/([^\/]+)\/folder\/([^\/]+)/;
   const match = url.match(regex);
   if (match) {
     return [ match[1], match[2] ]; // match[1] 和 match[2] 分别是你需要的两部分
+  }
+  const match2 = url.match(drive);
+  if (match2) {
+    return [ match2[1], match2[2] ];
   }
   return []; // 如果没有匹配，返回空数组
 }
