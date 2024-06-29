@@ -2,14 +2,13 @@ import { createBem } from '@/utils';
 import {
   AntCloudOutlined,
   SecurityScanFilled,
-  SmileOutlined,
+  CheckCircleOutlined,
   UserOutlined,
 } from '@ant-design/icons';
 import { ProCard } from '@ant-design/pro-components';
-import { Access } from '@umijs/max';
+import { Access, useModel } from '@umijs/max';
 import { Steps } from 'antd';
 import clsx from 'classnames';
-import { useModel } from 'umi';
 import DriveToken from './components/DriveToken';
 import OpenToken from './components/OpenToken';
 import Password from './components/Password';
@@ -61,7 +60,7 @@ export default () => {
               {
                 title: '提交结果',
                 status: pool[3],
-                icon: <SmileOutlined />,
+                icon: <CheckCircleOutlined />,
               },
             ]}
           />

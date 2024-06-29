@@ -50,7 +50,7 @@ export default {
   esbuildMinifyIIFE: true,
   proxy: {
     '/api/v1': {
-      target: 'http://localhost:5245',
+      target: 'http://localhost:80',
       changeOrigin: true,
     },
     '/api/': {

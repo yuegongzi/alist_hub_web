@@ -1,6 +1,6 @@
 import { api } from '@/constants';
 import { usePost, useForm } from '@/hooks';
-import { rule, extractParts } from '@/utils';
+import { rule, extractAliShare, extractQuark } from '@/utils';
 import { PlusOutlined } from '@ant-design/icons';
 import type { ActionType } from '@ant-design/pro-components';
 import {
@@ -23,6 +23,10 @@ const options = [
   {
     label: '阿里云盘',
     value: 'AliyundriveShare2Open',
+  },
+  {
+    label: '夸克分享',
+    value: 'QuarkShare',
   },
   {
     label: 'PikPak',
@@ -55,7 +59,7 @@ export default (props: { actionRef: RefObject<ActionType> }) => {
     return false;
   };
   const onChange = (e: any) => {
-    const [ share_id, root_folder_id ] = extractParts(e.target.value);
+    const [ share_id, root_folder_id ] = extractAliShare(e.target.value);
     if (share_id && root_folder_id) {
       set({
         addition: {
@@ -63,6 +67,16 @@ export default (props: { actionRef: RefObject<ActionType> }) => {
           root_folder_id,
         },
       });
+    } else {
+      const { root_folder_id, share_id } = extractQuark(e.target.value);
+      if (root_folder_id && share_id) {
+        set({
+          addition: {
+            share_id,
+            root_folder_id,
+          },
+        });
+      }
     }
   };
   return (
@@ -85,7 +99,11 @@ export default (props: { actionRef: RefObject<ActionType> }) => {
         {({ driver }) => {
           return (
             <div>
-              <Access accessible={[ 'AliyundriveShare2Open' ].includes(driver)}>
+              <Access
+                accessible={[ 'AliyundriveShare2Open', 'QuarkShare' ].includes(
+                  driver
+                )}
+              >
                 <ProFormTextArea
                   fieldProps={{ onChange }}
                   {...rule('自动识别', false)}
@@ -137,6 +155,20 @@ export default (props: { actionRef: RefObject<ActionType> }) => {
                 <ProFormText
                   name={[ 'addition', 'root_folder_path' ]}
                   {...rule('目录')}
+                />
+              </Access>
+              <Access accessible={[ 'QuarkShare' ].includes(driver)}>
+                <ProFormText
+                  name={[ 'addition', 'root_folder_id' ]}
+                  {...rule('根文件夹ID')}
+                />
+                <ProFormText
+                  name={[ 'addition', 'share_id' ]}
+                  {...rule('分享ID')}
+                />
+                <ProFormText
+                  name={[ 'addition', 'pass_code' ]}
+                  {...rule('提取码', false)}
                 />
               </Access>
             </div>

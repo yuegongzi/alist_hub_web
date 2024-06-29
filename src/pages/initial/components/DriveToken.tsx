@@ -6,7 +6,7 @@ import { useInterval } from 'ahooks';
 import { Button, Popover, QRCode, Space, Typography } from 'antd';
 import clsx from 'classnames';
 import { useEffect, useState } from 'react';
-import { useModel } from 'umi';
+import { useModel } from '@umijs/max';
 
 const [ bem ] = createBem('initial');
 

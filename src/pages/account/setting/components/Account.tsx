@@ -7,8 +7,13 @@ import {
   AntCloudOutlined,
   CloudFilled,
   MessageFilled,
+  CloudOutlined,
 } from '@ant-design/icons';
-import { ModalForm, ProFormText } from '@ant-design/pro-components';
+import {
+  ModalForm,
+  ProFormText,
+  ProFormTextArea,
+} from '@ant-design/pro-components';
 import { Button, Layout, List } from 'antd';
 import classNames from 'classnames';
 import { useState } from 'react';
@@ -21,8 +26,8 @@ export default () => {
   const { runAsync } = usePut(api.account, { manual: true, tip: 'all' });
   const notice = usePost(api.notice, { manual: true, tip: 'all' });
   const { data, refresh } = useGet(api.account);
-  const onFinish = async (values: any) => {
-    const { code } = await runAsync({ type: 'pikpak', params: values });
+  const onFinish = async (type: string, values: any) => {
+    const { code } = await runAsync({ type, params: values });
     refresh();
     return code === 200;
   };
@@ -72,7 +77,7 @@ export default () => {
             }
           />
           <ModalForm
-            onFinish={onFinish}
+            onFinish={(values: any) => onFinish('pikpak', values)}
             modalProps={{ closable: false }}
             width='480px'
             layout='horizontal'
@@ -90,6 +95,30 @@ export default () => {
               {...rule('密码')}
               name='password'
             />
+          </ModalForm>
+        </List.Item>
+        <List.Item>
+          <List.Item.Meta
+            avatar={<CloudOutlined />}
+            title='Quark'
+            description={
+              data.quark ? ellipsis(data.quark, 4) : '未绑定Quark账户'
+            }
+          />
+          <ModalForm
+            onFinish={(values: any) => onFinish('quark', values)}
+            modalProps={{ closable: false }}
+            width='480px'
+            layout='horizontal'
+            autoFocusFirstInput
+            title='Quark账户'
+            trigger={
+              <Button type='link' color='primary'>
+                修改
+              </Button>
+            }
+          >
+            <ProFormTextArea width='md' {...rule('cookie')} name='cookie' />
           </ModalForm>
         </List.Item>
         <List.Item>

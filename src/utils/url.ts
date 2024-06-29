@@ -42,7 +42,7 @@ export function isValidUrl(urlString: string): boolean {
   }
 }
 
-export function extractParts(url: string): string[] {
+export function extractAliShare(url: string): string[] {
   const regex = /https:\/\/www\.alipan\.com\/s\/([^\/]+)\/folder\/([^\/]+)/;
   const drive =
     /https:\/\/www\.aliyundrive\.com\/s\/([^\/]+)\/folder\/([^\/]+)/;
@@ -55,4 +55,22 @@ export function extractParts(url: string): string[] {
     return [ match2[1], match2[2] ];
   }
   return []; // 如果没有匹配，返回空数组
+}
+
+export function extractQuark(url: string): {
+  root_folder_id?: string;
+  share_id?: string;
+} {
+  const regex =
+    /https:\/\/pan\.quark\.cn\/s\/([a-zA-Z0-9]+)#\/list\/share\/([a-zA-Z0-9]+)-/;
+  const match = url.match(regex);
+
+  if (match && match.length > 2) {
+    return {
+      share_id: match[1],
+      root_folder_id: match[2],
+    };
+  }
+
+  return {};
 }
