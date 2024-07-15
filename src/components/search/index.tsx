@@ -2,12 +2,12 @@ import { api } from '@/constants';
 import { useGet } from '@/hooks';
 import { SearchOutlined } from '@ant-design/icons';
 import { useLocation, useModel } from '@umijs/max';
-import { Avatar, Input, List, Modal } from 'antd';
+import { Avatar, Input, List, Modal, Skeleton } from 'antd';
 import './index.less';
 
 export default () => {
   const [ state, setState ] = useModel('search');
-  const { runAsync, data } = useGet(api.search, {
+  const { runAsync, data, loading } = useGet(`${api.search}?pageSize=100`, {
     manual: true,
     debounceWait: 500,
     initialData: [],
@@ -50,27 +50,29 @@ export default () => {
             placeholder='请输入搜索关键词'
             onSearch={onSearch}
           />
-          <List
-            itemLayout='horizontal'
-            dataSource={data}
-            renderItem={(item: any, index) => (
-              <List.Item key={index}>
-                <List.Item.Meta
-                  avatar={
-                    <Avatar style={{ backgroundColor: '#f56a00' }}>
-                      {item.name[0]}
-                    </Avatar>
-                  }
-                  title={
-                    <a href='#' onClick={() => onClick(item)}>
-                      {item.name}
-                    </a>
-                  }
-                  description={item.parent}
-                />
-              </List.Item>
-            )}
-          />
+          <Skeleton loading={loading} active>
+            <List
+              itemLayout='horizontal'
+              dataSource={data}
+              renderItem={(item: any, index) => (
+                <List.Item key={index}>
+                  <List.Item.Meta
+                    avatar={
+                      <Avatar style={{ backgroundColor: '#f56a00' }}>
+                        {item.name[0]}
+                      </Avatar>
+                    }
+                    title={
+                      <a href='#' onClick={() => onClick(item)}>
+                        {item.name}
+                      </a>
+                    }
+                    description={item.parent}
+                  />
+                </List.Item>
+              )}
+            />
+          </Skeleton>
         </div>
       </Modal>
     </div>
