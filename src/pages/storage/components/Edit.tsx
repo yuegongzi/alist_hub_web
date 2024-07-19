@@ -1,6 +1,6 @@
-import { api } from '@/constants';
+import { api, Drive } from '@/constants';
 import { usePost, useForm } from '@/hooks';
-import { rule, extractAliShare, extractQuark } from '@/utils';
+import { rule, extractAliShare, extractQuark, getValue } from '@/utils';
 import { PlusOutlined } from '@ant-design/icons';
 import type { ActionType } from '@ant-design/pro-components';
 import {
@@ -13,6 +13,7 @@ import {
 import { Access } from '@umijs/max';
 import { Button } from 'antd';
 import type { RefObject } from 'react';
+import { Fragment } from 'react';
 
 const formLayout = {
   width: 520,
@@ -31,6 +32,14 @@ const options = [
   {
     label: 'PikPak',
     value: 'PikPakShare',
+  },
+  {
+    label: '115网盘',
+    value: '115 Share',
+  },
+  {
+    label: 'UC网盘',
+    value: 'UCShare',
   },
   {
     label: 'AList V3',
@@ -97,8 +106,25 @@ export default (props: { actionRef: RefObject<ActionType> }) => {
       <ProFormText {...rule('挂载路径')} name='mountPath' />
       <ProFormDependency name={[ 'driver' ]}>
         {({ driver }) => {
+          const formItems = getValue(Drive, driver, []);
           return (
             <div>
+              {formItems.map((item: any, index: number) => (
+                <Fragment key={index}>
+                  <Access accessible={item.type === 'text'}>
+                    <ProFormText
+                      name={[ 'addition', item.name ]}
+                      {...rule(item.label, item.required)}
+                    />
+                  </Access>
+                  <Access accessible={item.type === 'textArea'}>
+                    <ProFormTextArea
+                      name={[ 'addition', item.name ]}
+                      {...rule(item.label, item.required)}
+                    />
+                  </Access>
+                </Fragment>
+              ))}
               <Access
                 accessible={[ 'AliyundriveShare2Open', 'QuarkShare' ].includes(
                   driver
@@ -107,68 +133,6 @@ export default (props: { actionRef: RefObject<ActionType> }) => {
                 <ProFormTextArea
                   fieldProps={{ onChange }}
                   {...rule('自动识别', false)}
-                />
-              </Access>
-              <Access accessible={[ 'AList V2', 'AList V3' ].includes(driver)}>
-                <ProFormText name={[ 'addition', 'url' ]} {...rule('站点地址')} />
-                <ProFormText
-                  name={[ 'addition', 'root_folder_path' ]}
-                  {...rule('根目录')}
-                />
-                <ProFormText
-                  name={[ 'addition', 'access_token' ]}
-                  {...rule('认证Token', false)}
-                />
-                <ProFormText
-                  name={[ 'addition', 'password' ]}
-                  {...rule('访问密码', false)}
-                />
-              </Access>
-              <Access
-                accessible={[ 'AliyundriveShare2Open', 'PikPakShare' ].includes(
-                  driver
-                )}
-              >
-                <ProFormText
-                  name={[ 'addition', 'share_id' ]}
-                  {...rule('分享ID')}
-                />
-                <ProFormText
-                  name={[ 'addition', 'share_pwd' ]}
-                  {...rule('分享密码', false)}
-                />
-                <ProFormText
-                  name={[ 'addition', 'root_folder_id' ]}
-                  {...rule('根文件夹ID')}
-                />
-              </Access>
-              <Access accessible={[ 'WebDav' ].includes(driver)}>
-                <ProFormText name={[ 'addition', 'address' ]} {...rule('地址')} />
-                <ProFormText
-                  name={[ 'addition', 'username' ]}
-                  {...rule('用户名')}
-                />
-                <ProFormText.Password
-                  name={[ 'addition', 'password' ]}
-                  {...rule('密码')}
-                />
-                <ProFormText
-                  name={[ 'addition', 'root_folder_path' ]}
-                  {...rule('目录')}
-                />
-              </Access>
-              <Access accessible={[ 'QuarkShare' ].includes(driver)}>
-                <ProFormText
-                  name={[ 'addition', 'root_folder_id' ]}
-                  {...rule('根文件夹ID')}
-                />
-                <ProFormText
-                  name={[ 'addition', 'share_id' ]}
-                  {...rule('分享ID')}
-                />
-                <ProFormText
-                  name={[ 'addition', 'pass_code' ]}
-                  {...rule('提取码', false)}
                 />
               </Access>
             </div>

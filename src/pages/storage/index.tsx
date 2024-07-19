@@ -5,9 +5,10 @@ import { ExclamationCircleFilled } from '@ant-design/icons';
 import type { ActionType, ProColumns } from '@ant-design/pro-components';
 import { PageContainer, ProTable } from '@ant-design/pro-components';
 import { Access } from '@umijs/max';
-import { Badge, Button, Modal, Switch, Tag } from 'antd';
+import { Badge, Button, Modal, Switch, Tag, Tooltip } from 'antd';
 import { useRef } from 'react';
 import Edit from './components/Edit';
+import { ellipsis } from '@/utils/format';
 
 export default () => {
   const ref = useRef<ActionType>(null);
@@ -51,8 +52,13 @@ export default () => {
       dataIndex: 'status',
       sorter: true,
       search: false,
-      render: (text) => (
-        <Badge text={text} color={text === 'work' ? 'green' : 'red'} />
+      renderText: (text: string) => (
+        <Tooltip title={text}>
+          <Badge
+            text={ellipsis(text, 8)}
+            color={text === 'work' ? 'green' : 'red'}
+          />
+        </Tooltip>
       ),
     },
     {

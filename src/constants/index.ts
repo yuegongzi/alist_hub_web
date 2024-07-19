@@ -6,7 +6,7 @@ export const api = {
   aliyun_openapi: '/api/v1/open/aliyun/openapi/qr',
   initialize: '/api/v1/open/initialize',
   security: '/api/v1/setting/security',
-  account: '/api/v1/setting/account',
+  ali: '/api/v1/setting/ali',
   config: '/api/v1/setting/config',
   aria2: '/api/v1/setting/aria2',
   login: '/api/v1/login',
@@ -26,6 +26,188 @@ export const api = {
   notice: '/api/v1/notice',
   movie: '/api/v1/movie',
   authorized: '/api/v1/user/authorized',
+  drive: '/api/v1/setting/drive',
 };
 
 export const ignore_menu = [ '/account/setting' ];
+
+export const Drive = {
+  'AList V2': [
+    {
+      label: '站点地址',
+      name: 'url',
+      required: true,
+      type: 'textArea',
+    },
+    {
+      label: '根目录',
+      name: 'root_folder_path',
+      required: true,
+      type: 'text',
+    },
+    {
+      label: '认证Token',
+      name: 'access_token',
+      required: false,
+      type: 'text',
+    },
+    {
+      label: '访问密码',
+      name: 'password',
+      required: false,
+      type: 'text',
+    },
+  ],
+  'AList V3': [
+    {
+      label: '站点地址',
+      name: 'url',
+      required: true,
+      type: 'textArea',
+    },
+    {
+      label: '根目录',
+      name: 'root_folder_path',
+      required: true,
+      type: 'text',
+    },
+    {
+      label: '认证Token',
+      name: 'access_token',
+      required: false,
+      type: 'text',
+    },
+    {
+      label: '访问密码',
+      name: 'password',
+      required: false,
+      type: 'text',
+    },
+  ],
+  AliyundriveShare2Open: [
+    {
+      label: '分享ID',
+      name: 'share_id',
+      required: true,
+      type: 'text',
+    },
+    {
+      label: '分享密码',
+      name: 'share_pwd',
+      required: false,
+      type: 'text',
+    },
+    {
+      label: '根文件夹ID',
+      name: 'root_folder_id',
+      required: true,
+      type: 'text',
+    },
+  ],
+  PikPakShare: [
+    {
+      label: '分享ID',
+      name: 'share_id',
+      required: true,
+      type: 'text',
+    },
+    {
+      label: '分享密码',
+      name: 'share_pwd',
+      required: false,
+      type: 'text',
+    },
+    {
+      label: '根文件夹ID',
+      name: 'root_folder_id',
+      required: true,
+      type: 'text',
+    },
+  ],
+  QuarkShare: [
+    {
+      label: '分享ID',
+      name: 'share_id',
+      required: true,
+      type: 'text',
+    },
+    {
+      label: '提取码',
+      name: 'pass_code',
+      required: false,
+      type: 'text',
+    },
+    {
+      label: '根文件夹ID',
+      name: 'root_folder_id',
+      required: true,
+      type: 'text',
+    },
+  ],
+  WebDav: [
+    {
+      label: '地址',
+      name: 'address',
+      required: true,
+      type: 'text',
+    },
+    {
+      label: '用户名',
+      name: 'username',
+      required: true,
+      type: 'text',
+    },
+    {
+      label: '密码',
+      name: 'password',
+      required: true,
+      type: 'text',
+    },
+    {
+      label: '目录',
+      name: 'root_folder_path',
+      required: true,
+      type: 'text',
+    },
+  ],
+  '115 Share': [
+    {
+      label: '分享ID',
+      name: 'share_code',
+      required: true,
+      type: 'text',
+    },
+    {
+      label: '提取码',
+      name: 'receive_code',
+      required: false,
+      type: 'text',
+    },
+    {
+      label: '根文件夹ID',
+      name: 'root_folder_id',
+      required: true,
+      type: 'text',
+    },
+  ],
+  UCShare: [
+    {
+      label: '分享ID',
+      name: 'share_id',
+      required: true,
+      type: 'text',
+    },
+    {
+      label: '提取码',
+      name: 'pass_code',
+      required: false,
+      type: 'text',
+    },
+    {
+      label: '根文件夹ID',
+      name: 'root_folder_id',
+      required: true,
+      type: 'text',
+    },
+  ],
+};

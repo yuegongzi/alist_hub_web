@@ -43,7 +43,7 @@ export default () => {
         <List.Item>
           <List.Item.Meta title='阿里云盘' description='显示我的阿里云盘' />
           <Switch
-            checked={obj.ali}
+            checked={!obj.ali}
             loading={put.loading}
             onChange={(checked) =>
               update({
@@ -68,10 +68,13 @@ export default () => {
         </List.Item>
         <List.Item>
           <List.Item.Meta
-            title='订阅加密'
+            title='TVBox订阅'
             description={
-              <Typography.Text type='secondary' copyable={{ text: '暂未开放' }}>
-                TVBox订阅增加随机密钥
+              <Typography.Text
+                type='secondary'
+                copyable={{ text: `${location.origin}/tvbox/my.json` }}
+              >
+                复制
               </Typography.Text>
             }
           />

@@ -1,48 +1,27 @@
 import { api } from '@/constants';
-import { useGet, usePost, usePut } from '@/hooks';
-import { createBem, rule } from '@/utils';
-import { ellipsis } from '@/utils/format';
-import {
-  AliyunOutlined,
-  AntCloudOutlined,
-  CloudFilled,
-  MessageFilled,
-  CloudOutlined,
-} from '@ant-design/icons';
-import {
-  ModalForm,
-  ProFormText,
-  ProFormTextArea,
-} from '@ant-design/pro-components';
+import { useGet } from '@/hooks';
+import { createBem } from '@/utils';
+import { AliyunOutlined, AntCloudOutlined } from '@ant-design/icons';
 import { Button, Layout, List } from 'antd';
 import classNames from 'classnames';
 import { useState } from 'react';
 import AliDrive from './AliDrive';
+import ListItem from './ListItem';
+import { Drive } from '@/pages/account/setting/components/constants';
 
 const [ bem ] = createBem('account-setting');
 
 export default () => {
   const [ state, setState ] = useState({ open: false, type: 'drive' });
-  const { runAsync } = usePut(api.account, { manual: true, tip: 'all' });
-  const notice = usePost(api.notice, { manual: true, tip: 'all' });
-  const { data, refresh } = useGet(api.account);
-  const onFinish = async (type: string, values: any) => {
-    const { code } = await runAsync({ type, params: values });
-    refresh();
-    return code === 200;
-  };
-  const onUpdateNotice = async (values: any) => {
-    const { code } = await notice.runAsync(values);
-    refresh();
-    return code === 200;
-  };
+  const { data, refresh } = useGet(api.ali);
+
   return (
     <Layout.Content style={{ padding: '0 24px', minHeight: 280 }}>
       <div className={classNames(bem('title'))}>账号绑定</div>
       <List itemLayout='horizontal'>
         <List.Item>
           <List.Item.Meta
-            avatar={<AntCloudOutlined />}
+            avatar={<AntCloudOutlined style={{ fontSize: '24px' }} />}
             title='阿里云盘'
             description={data.username || '未绑定阿里云盘账户'}
           />
@@ -56,7 +35,7 @@ export default () => {
         </List.Item>
         <List.Item>
           <List.Item.Meta
-            avatar={<AliyunOutlined />}
+            avatar={<AliyunOutlined style={{ fontSize: '24px' }} />}
             title='开放平台'
             description={data.username || '未绑定阿里云开放平台'}
           />
@@ -68,86 +47,13 @@ export default () => {
             修改
           </Button>
         </List.Item>
-        <List.Item>
-          <List.Item.Meta
-            avatar={<CloudFilled />}
-            title='PikPak'
-            description={
-              data.pikpak ? ellipsis(data.pikpak, 4) : '未绑定PikPak账户'
-            }
-          />
-          <ModalForm
-            onFinish={(values: any) => onFinish('pikpak', values)}
-            modalProps={{ closable: false }}
-            width='480px'
-            layout='horizontal'
-            autoFocusFirstInput
-            title='PikPak账户'
-            trigger={
-              <Button type='link' color='primary'>
-                修改
-              </Button>
-            }
-          >
-            <ProFormText width='md' {...rule('账号')} name='username' />
-            <ProFormText.Password
-              width='md'
-              {...rule('密码')}
-              name='password'
-            />
-          </ModalForm>
-        </List.Item>
-        <List.Item>
-          <List.Item.Meta
-            avatar={<CloudOutlined />}
-            title='Quark'
-            description={
-              data.quark ? ellipsis(data.quark, 4) : '未绑定Quark账户'
-            }
-          />
-          <ModalForm
-            onFinish={(values: any) => onFinish('quark', values)}
-            modalProps={{ closable: false }}
-            width='480px'
-            layout='horizontal'
-            autoFocusFirstInput
-            title='Quark账户'
-            trigger={
-              <Button type='link' color='primary'>
-                修改
-              </Button>
-            }
-          >
-            <ProFormTextArea width='md' {...rule('cookie')} name='cookie' />
-          </ModalForm>
-        </List.Item>
-        <List.Item>
-          <List.Item.Meta
-            avatar={<MessageFilled />}
-            title='PushDeer'
-            description={
-              data.pushKey ? ellipsis(data.pushKey, 4) : '未绑定PushDeer账户'
-            }
-          />
-          <ModalForm
-            onFinish={onUpdateNotice}
-            modalProps={{ closable: false }}
-            width='480px'
-            layout='horizontal'
-            autoFocusFirstInput
-            title='PushDeer'
-            trigger={
-              <Button type='link' color='primary'>
-                修改
-              </Button>
-            }
-          >
-            <ProFormText width='md' {...rule('pushKey')} name='pushKey' />
-          </ModalForm>
-        </List.Item>
+        {Drive.map((item, index: number) => (
+          <ListItem key={index} {...item} />
+        ))}
       </List>
       <AliDrive
         {...state}
+        refresh={refresh}
         setOpen={(value: boolean) => setState({ ...state, open: value })}
       />
     </Layout.Content>

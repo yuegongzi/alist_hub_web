@@ -11,13 +11,14 @@ export default (props: {
   open: boolean;
   type: string;
   setOpen: (value: boolean) => void;
+  refresh: () => void;
 }) => {
   const { open, setOpen, type } = props;
   const drive = useGet(api.aliyun_drive, { ready: open && type == 'drive' });
   const openapi = useGet(api.aliyun_openapi, {
     ready: open && type == 'openapi',
   });
-  const account = usePut(api.account, { manual: true, tip: 'all' });
+  const account = usePut(api.ali, { manual: true, tip: 'all' });
   const refresh = async () => {
     if (type == 'drive') {
       drive.refresh();
@@ -33,6 +34,7 @@ export default (props: {
     const { code } = await account.runAsync({ type, params });
     if (code === 200) {
       setOpen(false);
+      props.refresh();
     }
   };
   return (
