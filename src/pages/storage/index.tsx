@@ -43,7 +43,6 @@ export default () => {
     {
       title: '类型',
       dataIndex: 'driver',
-      search: false,
       render: (text) => <Tag color='processing'>{text}</Tag>,
     },
 
