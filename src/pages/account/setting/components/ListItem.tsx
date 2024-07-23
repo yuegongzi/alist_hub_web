@@ -20,6 +20,7 @@ export type FormType = {
   type: 'text' | 'textArea';
   label: string;
   name: string;
+  required?: boolean;
 };
 export interface ListItemProps {
   title?: string;
@@ -71,14 +72,14 @@ export default (props: ListItemProps) => {
               <Access accessible={item.type === 'text'}>
                 <ProFormText
                   width='md'
-                  {...rule(item.label)}
+                  {...rule(item.label, item.required)}
                   name={item.name}
                 />
               </Access>
               <Access accessible={item.type === 'textArea'}>
                 <ProFormTextArea
                   name={item.name}
-                  {...rule(item.label)}
+                  {...rule(item.label, item.required)}
                   width='md'
                 />
               </Access>
