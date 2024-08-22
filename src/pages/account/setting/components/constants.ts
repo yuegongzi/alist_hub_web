@@ -16,7 +16,7 @@ export const Drive: ListItemProps[] = [
       },
       {
         type: 'text',
-        label: '用户名',
+        label: '密码',
         name: 'password',
         required: true,
       },
