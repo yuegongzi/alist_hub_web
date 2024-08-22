@@ -20,6 +20,18 @@ export const Drive: ListItemProps[] = [
         name: 'password',
         required: true,
       },
+      {
+        type: 'text',
+        label: '平台',
+        name: 'platform',
+        required: true,
+      },
+      {
+        type: 'text',
+        label: '设备ID',
+        name: 'device_id',
+        required: true,
+      },
     ],
   },
   {
